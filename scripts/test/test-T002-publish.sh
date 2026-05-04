@@ -12,10 +12,10 @@ check() {
   local label="$1" path="$2"
   if [ -f "$PROJECT_DIR/$path" ]; then
     echo "  PASS: $label"
-    ((PASS++))
+    ((++PASS))
   else
     echo "  FAIL: $label ($path missing)"
-    ((FAIL++))
+    ((++FAIL))
   fi
 }
 
@@ -27,13 +27,14 @@ check "todo_archive.py exists" "todo_archive.py"
 
 # Verify publish.json content
 if [ -f "$PROJECT_DIR/.github/publish.json" ]; then
-  ACCOUNT=$(python -c "import json; print(json.load(open('$PROJECT_DIR/.github/publish.json'))['github_account'])")
+  WIN_PATH=$(cygpath -w "$PROJECT_DIR/.github/publish.json" 2>/dev/null || echo "$PROJECT_DIR/.github/publish.json")
+  ACCOUNT=$(python -c "import json,sys; print(json.load(open(sys.argv[1]))['github_account'])" "$WIN_PATH")
   if [ "$ACCOUNT" = "grobomo" ]; then
     echo "  PASS: publish.json has grobomo account"
-    ((PASS++))
+    ((++PASS))
   else
     echo "  FAIL: publish.json account is $ACCOUNT, expected grobomo"
-    ((FAIL++))
+    ((++FAIL))
   fi
 fi
 
@@ -42,10 +43,10 @@ cd "$PROJECT_DIR"
 GIT_NAME=$(git config user.name || echo "")
 if [ "$GIT_NAME" = "grobomo" ]; then
   echo "  PASS: git user.name is grobomo"
-  ((PASS++))
+  ((++PASS))
 else
   echo "  FAIL: git user.name is '$GIT_NAME', expected grobomo"
-  ((FAIL++))
+  ((++FAIL))
 fi
 
 echo ""
