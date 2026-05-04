@@ -9,10 +9,17 @@ Project TODO files grow unbounded as tasks complete. A 30K-token TODO.md wastes 
 ## Usage
 
 ```bash
-python todo_archive.py                  # archive ./TODO.md
-python todo_archive.py path/to/TODO.md  # explicit path
-python todo_archive.py --dry-run        # preview without writing
+python todo_archive.py                       # archive ./TODO.md
+python todo_archive.py path/to/TODO.md       # explicit path
+python todo_archive.py --dry-run             # preview without writing
+python todo_archive.py --keep-recent 5       # keep last 5 completed sections visible
 ```
+
+### Log rotation mode
+
+`--keep-recent N` keeps the N most recent fully-completed sections in TODO.md
+so AI agents can see where they left off. Only older completed sections get archived.
+Without this flag, all completed tasks are archived.
 
 ## What it does
 
