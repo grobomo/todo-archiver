@@ -4,6 +4,8 @@ Reusable Python script to keep TODO.md lean by archiving completed tasks.
 
 ## Task 1: Create todo_archive.py
 
+- [ ] T001: Build todo_archive.py — standalone Python script (no deps beyond stdlib)
+
 Standalone Python script (no deps beyond stdlib). Reusable across all projects.
 
 ### Behavior
@@ -32,6 +34,8 @@ Run on hook-runner's TODO.md (30K tokens, mostly completed tasks) to verify it t
 Also test on ai-skill-marketplace's TODO.md.
 
 ## Task 2: Init git repo, publish to grobomo
+
+- [ ] T002: Publish to grobomo — .github/publish.json, README, MIT license
 
 Standard grobomo project: `.github/publish.json`, README, MIT license.
 
